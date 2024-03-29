@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const formidable = require('express-formidable');
 const uniqid = require('uniqid');
+const requestIp = require('request-ip');
 const connectToDB = require('./db');
 
 // start express server
@@ -25,6 +26,7 @@ app.use(formidable({ uploadDir: './public/uploads/' }, [{
     }
   },
 ]));
+app.use(requestIp.mw());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
